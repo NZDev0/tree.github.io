@@ -1,0 +1,159 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Georgia', serif;
+  color: #fff;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  width: 100%;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 span { color: #aaa; }
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #888;
+  letter-spacing: 0.04em;
+}
+
+/* ── Slider container ─────────────────────────────────────── */
+.slider-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  /* Height is set automatically by the image aspect ratio.
+     Override here if you want a fixed height, e.g. height: 500px; */
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+
+/* ── Images ───────────────────────────────────────────────── */
+.img-before,
+.img-after {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.img-before {
+  /* This image fills the container and sets the height */
+  position: relative;
+  display: block;
+}
+
+/* ── After panel (clipped) ────────────────────────────────── */
+.clip-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;        /* JS changes this value */
+  height: 100%;
+  overflow: hidden;
+}
+
+.clip-panel .img-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Keep after-image the same size as the container, not clipped width */
+  width: var(--container-width, 860px);
+  max-width: 860px;
+  height: 100%;
+}
+
+/* ── Divider line ─────────────────────────────────────────── */
+.divider {
+  position: absolute;
+  top: 0;
+  left: 50%;          /* JS changes this value */
+  width: 2px;
+  height: 100%;
+  background: rgba(255,255,255,0.9);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── Handle ───────────────────────────────────────────────── */
+.handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.slider-wrap:active .handle,
+.slider-wrap.dragging .handle {
+  transform: translate(-50%, -50%) scale(1.12);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* ── Labels ───────────────────────────────────────────────── */
+.label {
+  position: absolute;
+  bottom: 14px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 5;
+  backdrop-filter: blur(4px);
+}
+
+.label-before { right: 14px; }
+.label-after  { left: 14px; }
+
+/* ── Hint text ────────────────────────────────────────────── */
+.hint {
+  font-size: 0.8rem;
+  color: #555;
+  letter-spacing: 0.12em;
+  transition: opacity 0.4s;
+}
+
+.hint.hidden { opacity: 0; }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .handle { width: 36px; height: 36px; }
+  .handle svg { width: 16px; height: 16px; }
+}

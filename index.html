@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Before / After Slider</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page">
+    <h1>Before <span>&amp;</span> After</h1>
+    <p class="subtitle">Drag the handle to compare</p>
+
+    <div class="slider-wrap" id="sliderWrap">
+
+      <!-- BEFORE image — shown on the right side -->
+      <img class="img-before" src="images/before.png" alt="Before" draggable="false" />
+
+      <!-- AFTER image — revealed on the left by dragging -->
+      <div class="clip-panel" id="clipPanel">
+        <img class="img-after" src="images/after.png" alt="After" draggable="false" />
+      </div>
+
+      <!-- Divider line + handle -->
+      <div class="divider" id="divider">
+        <div class="handle" aria-label="Drag to compare">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7 4L2 10L7 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13 4L18 10L13 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Labels -->
+      <div class="label label-before">Before</div>
+      <div class="label label-after">After</div>
+
+    </div>
+
+    <p class="hint" id="hint">← drag →</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
